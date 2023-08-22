@@ -138,16 +138,16 @@ En installant ces outils et dépendances, vous vous assurez que votre environnem
      
    - Téléchargez le fichier tarball NS-3 depuis le site officiel ou un miroir. Utilisez la commande `wget` pour télécharger le fichier tarball NS-3. Par exemple :
      ```
-     wget https://www.nsnam.org/release/ns-allinone-3.xx.tar.bz2
+     wget https://www.nsnam.org/releases/ns-allinone-3.39.tar.bz2
      ```
    - Utilisez la commande `tar` pour extraire le contenu du tarball dans le dossier d'installation que vous avez créé. Par exemple :
      ```
-     tar -xvf ns-allinone-3.xx.tar.bz2 -C ns3-installation
+     tar -xvf ns-allinone-3.39.tar.bz2 -C ns3-installation
      ```
 **C. Configurer NS-3 :**
-   - Accédez au répertoire NS-3 nouvellement créé :
+   - Accédez au répertoire NS-3 nouvellement créé :(changez 3.39 selon la version de ns-3 installée)
      ```
-     cd ns3-installation/ns-allinone-3.xx/ns-3.xx
+     cd ns3-installation/ns-allinone-3.39/ns-3.39
      ```
    - Utilisez la commande `./waf configure` pour configurer NS-3. Lors de la configuration de NS-3, vous pouvez ajouter des options de configuration spécifiques en fonction de vos besoins. Ces options vous permettent de personnaliser la manière dont NS-3 sera construit et les fonctionnalités qui seront incluses dans la compilation. Voici comment vous pouvez ajouter des options de configuration lors de la configuration de NS-3 :
 
@@ -158,7 +158,7 @@ En installant ces outils et dépendances, vous vous assurez que votre environnem
 ****2. Ajouter des Options de Configuration :****
    - Vous pouvez ajouter des options de configuration en utilisant la syntaxe `--option=valeur`. Par exemple :
      ```
-     ./waf configure --enable-examples --disable-tests --with-foo=/chemin/vers/quelquechose
+     ./waf configure --enable-examples --enable-tests
      ```
    - Voici quelques options de configuration courantes que vous pourriez rencontrer :
      - `--enable-module` : Active un module spécifique.
