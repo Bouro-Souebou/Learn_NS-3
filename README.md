@@ -76,21 +76,41 @@ Maintenant que vous avez installé une distribution Linux via WSL, vous pouvez a
      tar -xvf ns-allinone-3.xx.tar.bz2 -C ns3-installation
      ```
 
-***3. Configurer et Compiler NS-3 :***
+**C. Configurer NS-3 :**
    - Accédez au répertoire NS-3 nouvellement créé :
      ```
      cd ns3-installation/ns-allinone-3.xx/ns-3.xx
      ```
-   - Utilisez la commande `./waf configure` pour configurer NS-3.  Vous pouvez ajouter des options de configuration si nécessaire.
+   - Utilisez la commande `./waf configure` pour configurer NS-3. Lors de la configuration de NS-3, vous pouvez ajouter des options de configuration spécifiques en fonction de vos besoins. Ces options vous permettent de personnaliser la manière dont NS-3 sera construit et les fonctionnalités qui seront incluses dans la compilation. Voici comment vous pouvez ajouter des options de configuration lors de la configuration de NS-3 :
+
+****1. Lancer la Configuration :****
+   - Accédez au répertoire NS-3 dans votre terminal WSL (Ubuntu).
+   - Utilisez la commande `./waf configure` pour commencer la configuration de NS-3.
+
+****2. Ajouter des Options de Configuration :****
+   - Vous pouvez ajouter des options de configuration en utilisant la syntaxe `--option=valeur`. Par exemple :
+     ```
+     ./waf configure --enable-examples --disable-tests --with-foo=/chemin/vers/quelquechose
+     ```
+   - Voici quelques options de configuration courantes que vous pourriez rencontrer :
+     - `--enable-module` : Active un module spécifique.
+     - `--disable-module` : Désactive un module spécifique.
+     - `--enable-examples` : Active la construction des exemples.
+     - `--disable-tests` : Désactive la construction des tests.
+     - `--with-foo=/chemin/vers/quelquechose` : Spécifie un chemin pour quelque chose (par exemple, une bibliothèque externe).
+
+****3. Vérifier les Options de Configuration :****
+   - Une fois que vous avez ajouté vos options de configuration, vous pouvez exécuter la commande `./waf --help` pour voir la liste complète des options et pour vérifier que vos options ont été prises en compte. Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3
+
+**D. Compiler NS-3 :**
    - Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3. Cela peut prendre un certain temps en fonction de votre système.
 
-***4. Exécuter des Exemples :***
+**E. Exécuter des Exemples :**
    - Après la compilation, vous pouvez exécuter les exemples de simulation NS-3 pour vous assurer que tout fonctionne correctement. Utilisez la commande `./waf --run exemple` pour exécuter un exemple donné.
 
    - À partir de maintenant, vous pouvez créer et exécuter vos propres scénarios de simulation NS-3 en utilisant les fichiers de script et les commandes appropriés.
     
-
-**C. Accès aux Fichiers :**
+**F. Accès aux Fichiers :**
    - Vous pouvez accéder aux fichiers de votre système Windows depuis WSL en naviguant vers le répertoire `/mnt` (par exemple, `/mnt/c/` pour le lecteur C).
    - Vous pouvez accéder aux fichiers de votre environnement Ubuntu installé via WSL (Windows Subsystem for Linux) à partir de Windows en utilisant le chemin `/mnt`. Voici comment vous pouvez voir le contenu des fichiers dans Windows :
 
