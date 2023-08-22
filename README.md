@@ -144,7 +144,103 @@ En installant ces outils et dépendances, vous vous assurez que votre environnem
      ```
      tar -xvf ns-allinone-3.39.tar.bz2 -C ns3-installation
      ```
-**C. Configurer NS-3 :**
+
+
+**D. configurer et construire NS-3**
+
+Dans le contexte de NS-3 (Network Simulator 3), le processus de build consiste à configurer et compiler le code source de NS-3 afin de générer les exécutables nécessaires pour exécuter des simulations de réseaux. La configuration et la compilation sont gérées à l'aide d'outils comme CMake, qui permettent de définir des options, de gérer les dépendances et de générer les fichiers de construction nécessaires.
+
+En général, pour configurer et construire NS-3, vous devrez suivre des étapes spécifiques en utilisant le système de construction CMake. Voici les étapes typiques que vous devriez suivre pour configurer et construire NS-3 :
+
+***1. Accéder au Répertoire NS-3 :***
+   - Ouvrez votre terminal dans l'environnement Ubuntu via WSL.
+   - Naviguez vers le répertoire NS-3 où vous avez extrait les fichiers source de NS-3.
+
+***2. Créer un Répertoire Build :***
+   - Il est recommandé de créer un répertoire séparé pour la construction (build) afin de garder le répertoire source propre. Créez un répertoire `build` dans le répertoire NS-3 :
+     ```
+     mkdir build
+     ```
+
+***3. Accéder au Répertoire Build :****
+   - Naviguez dans le répertoire de build que vous venez de créer :
+     ```
+     cd build
+     ```
+
+***4. Configurer la Build avec CMake :***
+   - Utilisez la commande `cmake` pour configurer la build de NS-3. Vous devez spécifier le chemin vers le répertoire source NS-3 (où se trouvent les fichiers CMakeLists.txt) :
+     ```
+     cmake ../
+     ```
+***5. Personnalisation des Options de Configuration (Facultatif) :***
+   - Vous pouvez ajouter des options de configuration à la commande `cmake` pour activer ou désactiver certaines fonctionnalités spécifiques. Par exemple, pour activer la visualisation graphique, vous pouvez utiliser :
+     ```
+     cmake ns3-installation/ns-allinone-3.39/ns-3.39 -DENABLE_PYTHON_BINDINGS=ON -DENABLE_MPI=ON -DENABLE_PYVIS=ON
+     ```
+
+***6. Vérification de la Configuration :***
+   - Après avoir exécuté la commande `cmake`, vous verrez une sortie indiquant les options configurées. Assurez-vous qu'elles sont correctes.
+
+***7. Exécuter la Compilation :***
+   - Après avoir configuré avec succès la build, vous pouvez exécuter la commande `make` pour compiler NS-3 :
+     ```
+     make
+     ```
+***8. Exécuter des Exemples ou des Simulations :***
+   - Après la compilation réussie, vous pouvez exécuter des exemples de simulation ou des scénarios NS-3 en utilisant les exécutables générés.
+
+
+****a. Exécuter un Exemple :****
+   - Utilisez la commande `./waf` suivie du chemin vers l'exemple que vous souhaitez exécuter. Par exemple, pour exécuter l'exemple "wifi-simple-adhoc", vous pouvez utiliser la commande :
+     ```
+     ./waf --run examples/wireless/wifi-simple-adhoc
+     ```
+
+****b. Paramètres d'Exécution (Facultatif) :****
+   - Certains exemples peuvent accepter des paramètres d'exécution spécifiques. Consultez la documentation de l'exemple pour connaître les paramètres possibles.
+
+****c. Visualiser les Résultats :****
+   - Après avoir exécuté un exemple de simulation, vous pouvez consulter les fichiers de sortie ou de journalisation générés pour voir les résultats de la simulation.
+
+****d. Explorer d'autres Exemples :****
+   - NS-3 propose de nombreux autres exemples de simulation dans divers domaines. Explorez le répertoire des exemples pour en savoir plus sur les fonctionnalités de NS-3.
+
+Assurez-vous de consulter la documentation NS-3 pour des instructions spécifiques à la version que vous utilisez, ainsi que pour obtenir des détails sur les paramètres et les options d'exécution des exemples. Les exemples sont un excellent moyen de comprendre comment NS-3 fonctionne et de tester différentes fonctionnalités de simulation.
+
+***9. Vérifier la Documentation de NS-3 :***
+   - Il est important de consulter la documentation NS-3 pour obtenir des instructions spécifiques à la version que vous utilisez, car les étapes peuvent varier en fonction des options et des fonctionnalités spécifiques.
+
+**E. Compiler NS-3 :**
+   - Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3. Cela peut prendre un certain temps en fonction de votre système.
+
+**F. Exécuter des Exemples :**
+   - Après la compilation, vous pouvez exécuter les exemples de simulation NS-3 pour vous assurer que tout fonctionne correctement. Utilisez la commande `./waf --run exemple` pour exécuter un exemple donné.
+
+   - À partir de maintenant, vous pouvez créer et exécuter vos propres scénarios de simulation NS-3 en utilisant les fichiers de script et les commandes appropriés.
+    
+**G. Accès aux Fichiers :**
+   - Vous pouvez accéder aux fichiers de votre système Windows depuis WSL en naviguant vers le répertoire `/mnt` (par exemple, `/mnt/c/` pour le lecteur C).
+   - Vous pouvez accéder aux fichiers de votre environnement Ubuntu installé via WSL (Windows Subsystem for Linux) à partir de Windows en utilisant le chemin `/mnt`. Voici comment vous pouvez voir le contenu des fichiers dans Windows :
+
+***1. Ouvrir l'Explorateur de Fichiers :***
+   - Ouvrez l'Explorateur de fichiers sur votre système Windows.
+
+***2. Accéder aux Fichiers WSL :***
+   - Dans la barre d'adresse de l'Explorateur de fichiers, tapez le chemin `/mnt` suivi du lecteur de votre distribution Linux. Par exemple :
+     - `/mnt/c` pour accéder au lecteur C.
+     - `/mnt/d` pour accéder au lecteur D.
+     - Et ainsi de suite.
+
+***3. Accéder au Dossier d'Installation de NS-3 :***
+   - Si vous avez créé un dossier d'installation spécifique pour NS-3 dans votre environnement Ubuntu, vous pouvez naviguer jusqu'à ce dossier en utilisant le chemin complet. Par exemple :
+     - `/mnt/c/Chemin/Vers/Votre/Dossier/ns3-installation`
+
+Une fois que vous avez accédé au dossier de votre environnement Ubuntu via l'Explorateur de fichiers Windows, vous pourrez voir et interagir avec les fichiers et dossiers de la même manière que vous le feriez dans n'importe quel autre dossier Windows. Cela peut être utile pour éditer des fichiers de script NS-3 dans un éditeur de texte Windows ou pour visualiser des résultats de simulation générés par NS-3.
+
+L'utilisation de WSL vous permet d'exécuter NS-3 dans un environnement Linux natif sans avoir à configurer une machine virtuelle distincte. Cependant, gardez à l'esprit que WSL n'offre pas nécessairement la même performance qu'un système Linux natif, mais il devrait être suffisamment adéquat pour l'apprentissage et le développement NS-3.
+
+**H. Configurer NS-3 :**
    - Accédez au répertoire NS-3 nouvellement créé :(changez 3.39 selon la version de ns-3 installée)
      ```
      cd ns3-installation/ns-allinone-3.39/ns-3.39
@@ -217,102 +313,3 @@ Il n'existe pas de commande unique pour vérifier la version de toutes les dépe
       dpkg -l | grep libsqlite3
       ```
 
-
-**D. Compiler NS-3 :**
-   - Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3. Cela peut prendre un certain temps en fonction de votre système.
-
-**E. Exécuter des Exemples :**
-   - Après la compilation, vous pouvez exécuter les exemples de simulation NS-3 pour vous assurer que tout fonctionne correctement. Utilisez la commande `./waf --run exemple` pour exécuter un exemple donné.
-
-   - À partir de maintenant, vous pouvez créer et exécuter vos propres scénarios de simulation NS-3 en utilisant les fichiers de script et les commandes appropriés.
-    
-**F. Accès aux Fichiers :**
-   - Vous pouvez accéder aux fichiers de votre système Windows depuis WSL en naviguant vers le répertoire `/mnt` (par exemple, `/mnt/c/` pour le lecteur C).
-   - Vous pouvez accéder aux fichiers de votre environnement Ubuntu installé via WSL (Windows Subsystem for Linux) à partir de Windows en utilisant le chemin `/mnt`. Voici comment vous pouvez voir le contenu des fichiers dans Windows :
-
-***1. Ouvrir l'Explorateur de Fichiers :***
-   - Ouvrez l'Explorateur de fichiers sur votre système Windows.
-
-***2. Accéder aux Fichiers WSL :***
-   - Dans la barre d'adresse de l'Explorateur de fichiers, tapez le chemin `/mnt` suivi du lecteur de votre distribution Linux. Par exemple :
-     - `/mnt/c` pour accéder au lecteur C.
-     - `/mnt/d` pour accéder au lecteur D.
-     - Et ainsi de suite.
-
-***3. Accéder au Dossier d'Installation de NS-3 :***
-   - Si vous avez créé un dossier d'installation spécifique pour NS-3 dans votre environnement Ubuntu, vous pouvez naviguer jusqu'à ce dossier en utilisant le chemin complet. Par exemple :
-     - `/mnt/c/Chemin/Vers/Votre/Dossier/ns3-installation`
-
-Une fois que vous avez accédé au dossier de votre environnement Ubuntu via l'Explorateur de fichiers Windows, vous pourrez voir et interagir avec les fichiers et dossiers de la même manière que vous le feriez dans n'importe quel autre dossier Windows. Cela peut être utile pour éditer des fichiers de script NS-3 dans un éditeur de texte Windows ou pour visualiser des résultats de simulation générés par NS-3.
-
-L'utilisation de WSL vous permet d'exécuter NS-3 dans un environnement Linux natif sans avoir à configurer une machine virtuelle distincte. Cependant, gardez à l'esprit que WSL n'offre pas nécessairement la même performance qu'un système Linux natif, mais il devrait être suffisamment adéquat pour l'apprentissage et le développement NS-3.
-
-**G. configurer et construire NS-3**
-
-Dans le contexte de NS-3 (Network Simulator 3), le processus de build consiste à configurer et compiler le code source de NS-3 afin de générer les exécutables nécessaires pour exécuter des simulations de réseaux. La configuration et la compilation sont gérées à l'aide d'outils comme CMake, qui permettent de définir des options, de gérer les dépendances et de générer les fichiers de construction nécessaires.
-
-En général, pour configurer et construire NS-3, vous devrez suivre des étapes spécifiques en utilisant le système de construction CMake. Voici les étapes typiques que vous devriez suivre pour configurer et construire NS-3 :
-
-Pour configurer la construction (build) de NS-3 à l'aide du système de build CMake, suivez ces étapes :
-
-***1. Accéder au Répertoire NS-3 :***
-   - Ouvrez votre terminal dans l'environnement Ubuntu via WSL.
-   - Naviguez vers le répertoire NS-3 où vous avez extrait les fichiers source de NS-3.
-
-***2. Créer un Répertoire Build :***
-   - Il est recommandé de créer un répertoire séparé pour la construction (build) afin de garder le répertoire source propre. Créez un répertoire `build` dans le répertoire NS-3 :
-     ```
-     mkdir build
-     ```
-
-***3. Accéder au Répertoire Build :****
-   - Naviguez dans le répertoire de build que vous venez de créer :
-     ```
-     cd build
-     ```
-
-***4. Configurer la Build avec CMake :***
-   - Utilisez la commande `cmake` pour configurer la build de NS-3. Vous devez spécifier le chemin vers le répertoire source NS-3 (où se trouvent les fichiers CMakeLists.txt) :
-     ```
-     cmake ns3-installation/ns-allinone-3.39/ns-3.39
-     ```
-
-***5. Personnalisation des Options de Configuration (Facultatif) :***
-   - Vous pouvez ajouter des options de configuration à la commande `cmake` pour activer ou désactiver certaines fonctionnalités spécifiques. Par exemple, pour activer la visualisation graphique, vous pouvez utiliser :
-     ```
-     cmake ns3-installation/ns-allinone-3.39/ns-3.39 -DENABLE_PYTHON_BINDINGS=ON -DENABLE_MPI=ON -DENABLE_PYVIS=ON
-     ```
-
-***6. Vérification de la Configuration :***
-   - Après avoir exécuté la commande `cmake`, vous verrez une sortie indiquant les options configurées. Assurez-vous qu'elles sont correctes.
-
-***7. Exécuter la Compilation :***
-   - Après avoir configuré avec succès la build, vous pouvez exécuter la commande `make` pour compiler NS-3 :
-     ```
-     make
-     ```
-***8. Exécuter des Exemples ou des Simulations :***
-   - Après la compilation réussie, vous pouvez exécuter des exemples de simulation ou des scénarios NS-3 en utilisant les exécutables générés.
-
-
-****a. Exécuter un Exemple :****
-   - Utilisez la commande `./waf` suivie du chemin vers l'exemple que vous souhaitez exécuter. Par exemple, pour exécuter l'exemple "wifi-simple-adhoc", vous pouvez utiliser la commande :
-     ```
-     ./waf --run examples/wireless/wifi-simple-adhoc
-     ```
-
-****b. Paramètres d'Exécution (Facultatif) :****
-   - Certains exemples peuvent accepter des paramètres d'exécution spécifiques. Consultez la documentation de l'exemple pour connaître les paramètres possibles.
-
-****c. Visualiser les Résultats :****
-   - Après avoir exécuté un exemple de simulation, vous pouvez consulter les fichiers de sortie ou de journalisation générés pour voir les résultats de la simulation.
-
-****d. Explorer d'autres Exemples :****
-   - NS-3 propose de nombreux autres exemples de simulation dans divers domaines. Explorez le répertoire des exemples pour en savoir plus sur les fonctionnalités de NS-3.
-
-Assurez-vous de consulter la documentation NS-3 pour des instructions spécifiques à la version que vous utilisez, ainsi que pour obtenir des détails sur les paramètres et les options d'exécution des exemples. Les exemples sont un excellent moyen de comprendre comment NS-3 fonctionne et de tester différentes fonctionnalités de simulation.
-
-***9. Vérifier la Documentation de NS-3 :***
-   - Il est important de consulter la documentation NS-3 pour obtenir des instructions spécifiques à la version que vous utilisez, car les étapes peuvent varier en fonction des options et des fonctionnalités spécifiques.
-
-La commande `./ns3` n'est généralement pas utilisée pour la configuration et la construction, mais plutôt pour exécuter des simulations et des scénarios une fois NS-3 est correctement configuré et construit. Assurez-vous de consulter la documentation NS-3 pour obtenir des instructions précises pour la version que vous utilisez.
