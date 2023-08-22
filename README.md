@@ -52,7 +52,72 @@ L'utilisation de WSL (Windows Subsystem for Linux) pour exécuter NS-3 sur Windo
      sudo apt upgrade
      ```
 Maintenant que vous avez installé une distribution Linux via WSL, vous pouvez accéder à un environnement Linux complet à partir de Windows. Vous pouvez utiliser cette distribution Linux pour exécuter NS-3 et d'autres applications Linux directement sur votre système Windows. N'hésitez pas à continuer avec les étapes d'installation et de configuration de NS-3 dans cet environnement.
-   
+
+**B. Installer les Outils et Dépendances :**
+Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsystem for Linux), vous devrez vous assurer d'avoir les outils et dépendances nécessaires pour la compilation et l'exécution de NS-3. Voici comment vous pouvez installer ces outils et dépendances :
+
+***1. Ouvrir le Terminal :***
+   - Ouvrez votre environnement Ubuntu installé via WSL en lançant la distribution Linux à partir du menu Démarrer.
+
+***2. Installer les Outils de Compilation :***
+   - NS-3 nécessite des outils de compilation tels que le compilateur C++ et les bibliothèques de développement. Installez-les en exécutant la commande suivante :
+     ```
+     sudo apt install g++ build-essential
+     ```
+
+***3. Installer Python :***
+   - NS-3 utilise Python pour diverses tâches. Assurez-vous d'avoir Python installé en exécutant la commande :
+     ```
+     sudo apt install python3
+     ```
+
+***4. Installer les Bibliothèques de Développement :***
+   - NS-3 peut nécessiter certaines bibliothèques de développement pour des fonctionnalités spécifiques. Vous pouvez installer les bibliothèques de base en utilisant la commande suivante :
+     ```
+     sudo apt install libgtk2.0-dev libboost-all-dev
+     ```
+***5. Installer CMake :***
+   - CMake est un outil de génération de systèmes de construction qui facilite la création, la configuration et la compilation de projets logiciels. Il est largement utilisé pour simplifier le processus de compilation et de création de projets complexes. NS-3 utilise CMake pour générer les fichiers de configuration nécessaires à la compilation de son code source. Utilisez la commande suivante pour installer CMake :
+   ```
+   sudo apt install cmake
+   ```
+***5. Installer les Autres Dépendances :***
+   - Selon la version de NS-3 que vous utilisez et les fonctionnalités que vous souhaitez, d'autres dépendances pourraient être nécessaires. Consultez la documentation NS-3 pour obtenir des informations spécifiques.
+   - Les dépendances spécifiques peuvent varier en fonction de la version de NS-3 que vous utilisez et des fonctionnalités que vous souhaitez utiliser. Cependant, voici quelques dépendances supplémentaires qui pourraient être nécessaires pour certaines fonctionnalités spécifiques de NS-3 ou pour la compilation de certains modules :
+
+****a. Dépendances pour le support de Python :****
+      - Si vous prévoyez d'utiliser des scripts Python avec NS-3, vous pourriez avoir besoin de certaines bibliothèques Python. Installez-les avec la commande :
+     ```
+     sudo apt install python3-dev python3-setuptools
+     ```
+
+****b. Bibliothèques liées à la simulation sans fil :****
+      - Si vous travaillez avec des simulations sans fil, vous pourriez avoir besoin de bibliothèques supplémentaires pour la gestion des interfaces sans fil. Installez-les avec la commande :
+     ```
+     sudo apt install libxml2 libxml2-dev libgtk-3-dev
+     ```
+
+****c. Bibliothèques pour la visualisation graphique :****
+      - Si vous prévoyez d'utiliser les fonctionnalités de visualisation graphique de NS-3, vous pourriez avoir besoin de bibliothèques graphiques. Installez-les avec la commande :
+     ```
+     sudo apt install gnuplot libqt5core5a libqt5gui5 libqt5widgets5 libpcap-dev
+     ```
+
+****d. Bibliothèques pour les simulations Wi-Fi :****
+      - Si vous travaillez avec des simulations Wi-Fi, vous pourriez avoir besoin de bibliothèques supplémentaires pour le support Wi-Fi. Installez-les avec la commande :
+     ```
+     sudo apt install libnl-3-dev libnl-genl-3-dev
+     ```
+
+****e. Bibliothèques pour les simulations LTE :****
+      - Si vous travaillez avec des simulations LTE, vous pourriez avoir besoin de bibliothèques supplémentaires pour le support LTE. Installez-les avec la commande :
+     ```
+     sudo apt install libsqlite3-dev libfftw3-dev libzmq3-dev
+     ```
+
+Assurez-vous de consulter la documentation spécifique de NS-3 pour la version que vous utilisez et pour les fonctionnalités que vous prévoyez d'exploiter. La documentation de NS-3 vous fournira des informations détaillées sur les dépendances requises pour les différents modules et fonctionnalités.
+
+En installant ces outils et dépendances, vous vous assurez que votre environnement Ubuntu via WSL est prêt à compiler et exécuter NS-3. Après avoir installé les dépendances, vous pouvez passer à l'étape suivante, c'est-à-dire télécharger et extraire NS-3, puis configurer et compiler le logiciel conformément à la documentation.
 
 **B. Installation de NS-3 :**
    L'installation de NS-3 dans un environnement Windows via WSL (Windows Subsystem for Linux) implique essentiellement d'effectuer les mêmes étapes que vous feriez sur une machine Linux. Voici comment procéder :
@@ -75,7 +140,6 @@ Maintenant que vous avez installé une distribution Linux via WSL, vous pouvez a
      ```
      tar -xvf ns-allinone-3.xx.tar.bz2 -C ns3-installation
      ```
-
 **C. Configurer NS-3 :**
    - Accédez au répertoire NS-3 nouvellement créé :
      ```
@@ -99,8 +163,56 @@ Maintenant que vous avez installé une distribution Linux via WSL, vous pouvez a
      - `--disable-tests` : Désactive la construction des tests.
      - `--with-foo=/chemin/vers/quelquechose` : Spécifie un chemin pour quelque chose (par exemple, une bibliothèque externe).
 
-****3. Vérifier les Options de Configuration :****
-   - Une fois que vous avez ajouté vos options de configuration, vous pouvez exécuter la commande `./waf --help` pour voir la liste complète des options et pour vérifier que vos options ont été prises en compte. Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3
+****3. Vérifier les Options de Configuration et les dépendances :****
+   - Une fois que vous avez ajouté vos options de configuration, vous pouvez exécuter la commande `./waf --help` pour voir la liste complète des options et pour vérifier que vos options ont été prises en compte. Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3.
+   - Pour vérifier la version de NS-3 installée dans votre environnement Ubuntu via WSL, vous pouvez exécuter la commande suivante :
+
+   ```
+   ./waf --version
+   ```
+
+Assurez-vous d'exécuter cette commande depuis le répertoire NS-3 où vous avez configuré et compilé le logiciel. Cette commande affichera la version de NS-3 que vous avez installée.
+
+Si vous souhaitez vérifier la version de NS-3 depuis n'importe quel répertoire, vous pouvez ajouter le chemin complet vers l'exécutable `waf` dans la commande. Par exemple :
+
+   ```
+   /chemin/vers/ns3-installation/ns-allinone-3.xx/ns-3.xx/waf --version
+   ```
+
+Remplacez "/chemin/vers/ns3-installation" par le chemin réel vers le dossier d'installation de NS-3 sur votre système.
+Il n'existe pas de commande unique pour vérifier la version de toutes les dépendances de NS-3 en une seule fois. Cependant, vous pouvez vérifier la version des dépendances individuellement en utilisant des commandes spécifiques à chaque bibliothèque ou outil. Voici quelques exemples de commandes que vous pouvez utiliser pour vérifier la version de certaines dépendances courantes :
+
+      ```Vérification de la Version de Python
+      python3 --version
+      ```
+      
+      ```Vérification de la Version de G++ (Compilateur C++)
+      g++ --version
+      ```
+      ```Vérification de la Version du Système de construction (cmake)
+      cmake --version
+      ```
+      
+      
+      ```Vérification de la Version de Boost
+      dpkg -l | grep libboost
+      ```
+      
+      ```Vérification de la Version de libxml2
+      dpkg -l | grep libxml2
+      ```
+      
+      ```Vérification de la Version de libpcap
+      dpkg -l | grep libpcap
+      ```
+      
+      ```Vérification de la Version de libnl
+      dpkg -l | grep libnl
+      ```
+      ```Vérification de la Version de libsqlite3
+      dpkg -l | grep libsqlite3
+      ```
+
 
 **D. Compiler NS-3 :**
    - Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3. Cela peut prendre un certain temps en fonction de votre système.
