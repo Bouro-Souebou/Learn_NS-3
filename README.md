@@ -87,10 +87,10 @@ Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsyste
 
 ****a. Dépendances pour le support de Python :****
       - Si vous prévoyez d'utiliser des scripts Python avec NS-3, vous pourriez avoir besoin de certaines bibliothèques Python. Installez-les avec la commande :
+      
      ```
      sudo apt install python3-dev python3-setuptools
      ```
-
 ****b. Bibliothèques liées à la simulation sans fil :****
       - Si vous travaillez avec des simulations sans fil, vous pourriez avoir besoin de bibliothèques supplémentaires pour la gestion des interfaces sans fil. Installez-les avec la commande :
       
@@ -100,18 +100,21 @@ Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsyste
 
 ****c. Bibliothèques pour la visualisation graphique :****
       - Si vous prévoyez d'utiliser les fonctionnalités de visualisation graphique de NS-3, vous pourriez avoir besoin de bibliothèques graphiques. Installez-les avec la commande :
+      
      ```
      sudo apt install gnuplot libqt5core5a libqt5gui5 libqt5widgets5 libpcap-dev
      ```
 
 ****d. Bibliothèques pour les simulations Wi-Fi :****
       - Si vous travaillez avec des simulations Wi-Fi, vous pourriez avoir besoin de bibliothèques supplémentaires pour le support Wi-Fi. Installez-les avec la commande :
+      
      ```
      sudo apt install libnl-3-dev libnl-genl-3-dev
      ```
 
 ****e. Bibliothèques pour les simulations LTE :****
       - Si vous travaillez avec des simulations LTE, vous pourriez avoir besoin de bibliothèques supplémentaires pour le support LTE. Installez-les avec la commande :
+      
      ```
      sudo apt install libsqlite3-dev libfftw3-dev libzmq3-dev
      ```
