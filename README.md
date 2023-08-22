@@ -93,6 +93,7 @@ Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsyste
 
 ****b. Bibliothèques liées à la simulation sans fil :****
       - Si vous travaillez avec des simulations sans fil, vous pourriez avoir besoin de bibliothèques supplémentaires pour la gestion des interfaces sans fil. Installez-les avec la commande :
+      
      ```
      sudo apt install libxml2 libxml2-dev libgtk-3-dev
      ```
