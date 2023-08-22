@@ -248,6 +248,7 @@ Une fois que vous avez accédé au dossier de votre environnement Ubuntu via l'E
 L'utilisation de WSL vous permet d'exécuter NS-3 dans un environnement Linux natif sans avoir à configurer une machine virtuelle distincte. Cependant, gardez à l'esprit que WSL n'offre pas nécessairement la même performance qu'un système Linux natif, mais il devrait être suffisamment adéquat pour l'apprentissage et le développement NS-3.
 
 **G. configurer et construire NS-3**
+
 Dans le contexte de NS-3 (Network Simulator 3), le processus de build consiste à configurer et compiler le code source de NS-3 afin de générer les exécutables nécessaires pour exécuter des simulations de réseaux. La configuration et la compilation sont gérées à l'aide d'outils comme CMake, qui permettent de définir des options, de gérer les dépendances et de générer les fichiers de construction nécessaires.
 
 En général, pour configurer et construire NS-3, vous devrez suivre des étapes spécifiques en utilisant le système de construction CMake. Voici les étapes typiques que vous devriez suivre pour configurer et construire NS-3 :
@@ -273,15 +274,13 @@ Pour configurer la construction (build) de NS-3 à l'aide du système de build C
 ***4. Configurer la Build avec CMake :***
    - Utilisez la commande `cmake` pour configurer la build de NS-3. Vous devez spécifier le chemin vers le répertoire source NS-3 (où se trouvent les fichiers CMakeLists.txt) :
      ```
-     cmake chemin/vers/ns-3
+     cmake ns3-installation/ns-allinone-3.39/ns-3.39
      ```
-
-   - Remplacez `chemin/vers/ns-3` par le chemin absolu vers le répertoire NS-3.
 
 ***5. Personnalisation des Options de Configuration (Facultatif) :***
    - Vous pouvez ajouter des options de configuration à la commande `cmake` pour activer ou désactiver certaines fonctionnalités spécifiques. Par exemple, pour activer la visualisation graphique, vous pouvez utiliser :
      ```
-     cmake chemin/vers/ns-3 -DENABLE_PYTHON_BINDINGS=ON -DENABLE_MPI=ON -DENABLE_PYVIS=ON
+     cmake ns3-installation/ns-allinone-3.39/ns-3.39 -DENABLE_PYTHON_BINDINGS=ON -DENABLE_MPI=ON -DENABLE_PYVIS=ON
      ```
 
 ***6. Vérification de la Configuration :***
