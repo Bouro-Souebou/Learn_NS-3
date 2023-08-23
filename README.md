@@ -159,105 +159,116 @@ En installant ces outils et dépendances, vous vous assurez que votre environnem
      ```
      mkdir ns3-installation
      ```
-     Créer un dossier d'installation spécifique pour NS-3 peut vous aider à garder votre environnement propre et organisé.
+     Créer un dossier d'installation spécifique pour NS-3 peut vous aider à garder votre environnement propre et organisé. Accedez au dossier crée : 
+     ```
+     cd ns3-installation
+     ```
      
-   - Téléchargez le fichier tarball NS-3 depuis le site officiel ou un miroir. Utilisez la commande `wget` pour télécharger le fichier tarball NS-3. Par exemple :
+   - Téléchargez le fichier tarball NS-3 depuis le site officiel ou un miroir. Utilisez la commande `wget` (un outil de ligne de commande pour récupérer des objets sur le Web) pour télécharger le fichier tarball NS-3. Par exemple :
      ```
      wget https://www.nsnam.org/releases/ns-allinone-3.39.tar.bz2
      ```
    - Utilisez la commande `tar` pour extraire le contenu du tarball dans le dossier d'installation que vous avez créé. Par exemple :
      ```
-     tar -xvf ns-allinone-3.39.tar.bz2 -C ns3-installation
+     tar -xvf ns-allinone-3.39.tar.bz2
      ```
-   -Les commandes ci-dessous utilisent un wrapper Python autour de CMake, appelé ns3, qui simplifie la syntaxe de la ligne de commande, ressemblant à la syntaxe Waf . Il existe plusieurs options pour contrôler la build, mais activer les exemples de programmes et les tests, pour un profil de build par défaut (avec les assertions activées et la prise en charge de la journalisation ns-3 ) est ce qui est généralement fait au début :
+- si vous accédez au répertoire ns-allinone-3.39 `cd ns-allinone-3.39` puis `ls`, vous devriez voir un certain nombre de fichiers et de répertoires : `README.md  bake  build.py  constants.py  netanim-3.109  ns-3.39  util.py`
 
-     ```
-     ./ns3 configure --enable-examples --enable-tests
-     ```
-  - Ensuite, utilisez le ns3programme pour créer les bibliothèques et les exécutables du module ns-3 :
-     ```
-     ./ns3 configure --enable-examples --enable-tests
-     ```
-     - Une fois terminé, vous pouvez exécuter les tests unitaires pour vérifier votre build :
-   
-      ```
-      ./test.py
-      ```
-      Cette commande devrait exécuter plusieurs centaines de tests unitaires. S'ils réussissent, vous avez réussi une construction initiale de ns-3 .
-    
-**D. configurer et construire NS-3**
-
+*Bâtiment ns-3* 
 Dans le contexte de NS-3 (Network Simulator 3), le processus de build consiste à configurer et compiler le code source de NS-3 afin de générer les exécutables nécessaires pour exécuter des simulations de réseaux. La configuration et la compilation sont gérées à l'aide d'outils comme CMake, qui permettent de définir des options, de gérer les dépendances et de générer les fichiers de construction nécessaires.
 
 En général, pour configurer et construire NS-3, vous devrez suivre des étapes spécifiques en utilisant le système de construction CMake. Voici les étapes typiques que vous devriez suivre pour configurer et construire NS-3 :
 
+**D. Construire NS-3**
+CMake doit être installé avant de construire ns-3
+
 ***1. Accéder au Répertoire NS-3 :***
    - Ouvrez votre terminal dans l'environnement Ubuntu via WSL.
    - Naviguez vers le répertoire NS-3 où vous avez extrait les fichiers source de NS-3.
+     ```
+     cd ns3-installation/ns-allinone-3.39
+     ```
+   - Le script build.py disponible dans le repertoire peut orchestrer une construction simple de composants. 
+     ```
+     ./build.py --enable-examples --enable-tests
+     ```
+     les arguments de build.py lui disent de construire des exemples et des tests. Le programme construit également par défaut tous les modules disponibles. Plus tard, vous pourrez construire ns-3 sans exemples ni tests, ou éliminer les modules qui ne sont pas nécessaires à votre travail, si vous le souhaitez.
+     Pour continuer, veuillez acceder au répertoire ns-3.39. 
+     ```
+     cd ns-3.39
+     ```
+***3. Construire avec le wrapper ns3 CMake :***
+- Nettoyez la version précédente n'est généralement pas strictement nécessaire mais constitue une bonne pratique
+     ```
+     ./ns3 clean
+     ```
+  cela supprimera les bibliothèques et les fichiers objets précédemment construits trouvés dans le répertoire build/
+  - Pour indiquer à ns-3 qu'il doit effectuer des builds optimisés incluant les exemples et les tests, vous devrez exécuter les commandes suivantes :
+     ```
+     ./ns3 configure --build-profile=optimized --enable-examples --enable-tests
+     ```
+  - Certaines options ns-3 ne sont pas activées par défaut ou nécessitent la prise en charge du système sous-jacent pour fonctionner correctement ( ). D'autres options peuvent dépendre de bibliothèques tierces qui, si elles ne sont pas trouvées, seront désactivées ( ).
+  - Maintenant, continuez et revenez à la version de débogage qui inclut les exemples et les tests.
+     ```
+     ./ns3 clean
+     ```
+  - 
+     ```
+     ./ns3 configure --build-profile=debug --enable-examples --enable-tests
+     ```
+  - Le système de build est maintenant configuré et vous pouvez construire les versions de débogage des programmes ns-3 en tapant simplement :
+     ```
+     ./ns3 build
+     ```
+  - Bien que les étapes ci-dessus vous aient obligé à créer deux fois la partie ns-3 du système, vous savez maintenant comment modifier la configuration et créer du code optimisé.
+  - Une commande existe pour vérifier quel profil est actuellement actif pour un projet déjà configuré :
+     ```
+     ./ns3 show profile
+     ```
+**E. Test de ns-3 :**
+Vous pouvez exécuter les tests unitaires de la distribution ns-3 en exécutant le script ./test.py :
+     ```
+     ./test.py --no-build
+     ```
+ `Running without Building` : Les commandes `./test.py --no-build` et `./test.py` sont liées à l'exécution des tests dans un projet logiciel. L'option `--no-build`, signifie que les tests ne seront pas reconstruits avant leur exécution. Cela peut être utile lorsque vous avez déjà compilé et construit les tests auparavant, et que vous souhaitez simplement les exécuter à nouveau sans passer par la phase de construction.Ce qui est important est que la ligne récapitulative à la fin indique que tous les tests ont réussi ; aucun n'a échoué ou ne s'est écrasé. 
+ 
+**F. Exécuter des Exemples (un script) :**
+   - Pour exécuter un programme, utilisez simplement l'option `--run` dans ns3. Exécutons l' équivalent ns-3 du programme omniprésent `hello world` en tapant ce qui suit :
+     ```
+     ./ns3 run hello-simulator
+     ```    
+   - À partir de maintenant, vous pouvez créer et exécuter vos propres scénarios de simulation NS-3 en utilisant les fichiers de script et les commandes appropriés.
+   - 
+***1. Arguments du programme / Paramètres d'Exécution (Facultatif):***
+   - Pour transmettre des arguments de ligne de commande à un programme ns-3, utilisez ce modèle :
+```
+./ns3 run <ns3-program> --command-template="%s <args>"
+ou
+./ns3 run '<ns3-program> --arg1=value1 --arg2=value2 ...'
+ou
+./ns3 run '<ns3-program> --arg1=value1 --arg2=value2 ...' --no-build
+```
+   - Pour appeler `test-runner` directement pour un seul test :
+```
+./ns3 run test-runner --command-template="%s --help"
+```
 
-***2. Créer un Répertoire Build :***
-   - Il est recommandé de créer un répertoire séparé pour la construction (build) afin de garder le répertoire source propre. Créez un répertoire `build` dans le répertoire NS-3 :
-     ```
-     mkdir build
-     ```
+***2. Débogage  :***
+- Pour exécuter des programmes ns-3 sous le contrôle d'un autre utilitaire, tel qu'un débogueur ( par exemple gdb ) ou un vérificateur de mémoire ( par exemple valgrind ), vous utilisez un --command-template="..." :
+  ```
+  ./ns3 run hello-simulator --command-template="gdb %s --args <args>"
+  ```
+  - On peut combiner cette recette et la précédente pour faire un test sous le débogueur :
+    ```
+    ./ns3 run test-runner --command-template="gdb %s --args --suite=mytest --verbose"
+    ```
 
-***3. Accéder au Répertoire Build :****
-   - Naviguez dans le répertoire de build que vous venez de créer :
-     ```
-     cd build
-     ```
-
-***4. Configurer la Build avec CMake :***
-   - Utilisez la commande `cmake` pour configurer la build de NS-3. Vous devez spécifier le chemin vers le répertoire source NS-3 (où se trouvent les fichiers CMakeLists.txt) :
-     ```
-     cmake ../
-     ```
-***5. Personnalisation des Options de Configuration (Facultatif) :***
-   - Vous pouvez ajouter des options de configuration à la commande `cmake` pour activer ou désactiver certaines fonctionnalités spécifiques. Par exemple, pour activer la visualisation graphique, vous pouvez utiliser :
-     ```
-     cmake ns3-installation/ns-allinone-3.39/ns-3.39 -DENABLE_PYTHON_BINDINGS=ON -DENABLE_MPI=ON -DENABLE_PYVIS=ON
-     ```
-
-***6. Vérification de la Configuration :***
-   - Après avoir exécuté la commande `cmake`, vous verrez une sortie indiquant les options configurées. Assurez-vous qu'elles sont correctes.
-
-***7. Exécuter la Compilation :***
-   - Après avoir configuré avec succès la build, vous pouvez exécuter la commande `make` pour compiler NS-3 :
-     ```
-     make
-     ```
-***8. Exécuter des Exemples ou des Simulations :***
-   - Après la compilation réussie, vous pouvez exécuter des exemples de simulation ou des scénarios NS-3 en utilisant les exécutables générés.
-
-
-****a. Exécuter un Exemple :****
-   - Utilisez la commande `./waf` suivie du chemin vers l'exemple que vous souhaitez exécuter. Par exemple, pour exécuter l'exemple "wifi-simple-adhoc", vous pouvez utiliser la commande :
-     ```
-     ./waf --run examples/wireless/wifi-simple-adhoc
-     ```
-
-****b. Paramètres d'Exécution (Facultatif) :****
-   - Certains exemples peuvent accepter des paramètres d'exécution spécifiques. Consultez la documentation de l'exemple pour connaître les paramètres possibles.
-
-****c. Visualiser les Résultats :****
+****3. Visualiser les Résultats :****
    - Après avoir exécuté un exemple de simulation, vous pouvez consulter les fichiers de sortie ou de journalisation générés pour voir les résultats de la simulation.
 
-****d. Explorer d'autres Exemples :****
+****4. Explorer d'autres Exemples :****
    - NS-3 propose de nombreux autres exemples de simulation dans divers domaines. Explorez le répertoire des exemples pour en savoir plus sur les fonctionnalités de NS-3.
-
-Assurez-vous de consulter la documentation NS-3 pour des instructions spécifiques à la version que vous utilisez, ainsi que pour obtenir des détails sur les paramètres et les options d'exécution des exemples. Les exemples sont un excellent moyen de comprendre comment NS-3 fonctionne et de tester différentes fonctionnalités de simulation.
-
-***9. Vérifier la Documentation de NS-3 :***
-   - Il est important de consulter la documentation NS-3 pour obtenir des instructions spécifiques à la version que vous utilisez, car les étapes peuvent varier en fonction des options et des fonctionnalités spécifiques.
-
-**E. Compiler NS-3 :**
-   - Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3. Cela peut prendre un certain temps en fonction de votre système.
-
-**F. Exécuter des Exemples :**
-   - Après la compilation, vous pouvez exécuter les exemples de simulation NS-3 pour vous assurer que tout fonctionne correctement. Utilisez la commande `./waf --run exemple` pour exécuter un exemple donné.
-
-   - À partir de maintenant, vous pouvez créer et exécuter vos propres scénarios de simulation NS-3 en utilisant les fichiers de script et les commandes appropriés.
-    
+ 
 **G. Accès aux Fichiers :**
    - Vous pouvez accéder aux fichiers de votre système Windows depuis WSL en naviguant vers le répertoire `/mnt` (par exemple, `/mnt/c/` pour le lecteur C).
    - Vous pouvez accéder aux fichiers de votre environnement Ubuntu installé via WSL (Windows Subsystem for Linux) à partir de Windows en utilisant le chemin `/mnt`. Voici comment vous pouvez voir le contenu des fichiers dans Windows :
@@ -279,46 +290,10 @@ Une fois que vous avez accédé au dossier de votre environnement Ubuntu via l'E
 
 L'utilisation de WSL vous permet d'exécuter NS-3 dans un environnement Linux natif sans avoir à configurer une machine virtuelle distincte. Cependant, gardez à l'esprit que WSL n'offre pas nécessairement la même performance qu'un système Linux natif, mais il devrait être suffisamment adéquat pour l'apprentissage et le développement NS-3.
 
-**H. Configurer NS-3 :**
-   - Accédez au répertoire NS-3 nouvellement créé :(changez 3.39 selon la version de ns-3 installée)
-     ```
-     cd ns3-installation/ns-allinone-3.39/ns-3.39
-     ```
-   - Utilisez la commande `./waf configure` pour configurer NS-3. Lors de la configuration de NS-3, vous pouvez ajouter des options de configuration spécifiques en fonction de vos besoins. Ces options vous permettent de personnaliser la manière dont NS-3 sera construit et les fonctionnalités qui seront incluses dans la compilation. Voici comment vous pouvez ajouter des options de configuration lors de la configuration de NS-3 :
 
-****1. Lancer la Configuration :****
-   - Accédez au répertoire NS-3 dans votre terminal WSL (Ubuntu).
-   - Utilisez la commande `./waf configure` pour commencer la configuration de NS-3.
 
-****2. Ajouter des Options de Configuration :****
-   - Vous pouvez ajouter des options de configuration en utilisant la syntaxe `--option=valeur`. Par exemple :
-     ```
-     ./waf configure --enable-examples --enable-tests
-     ```
-   - Voici quelques options de configuration courantes que vous pourriez rencontrer :
-     - `--enable-module` : Active un module spécifique.
-     - `--disable-module` : Désactive un module spécifique.
-     - `--enable-examples` : Active la construction des exemples.
-     - `--disable-tests` : Désactive la construction des tests.
-     - `--with-foo=/chemin/vers/quelquechose` : Spécifie un chemin pour quelque chose (par exemple, une bibliothèque externe).
-
-****3. Vérifier les Options de Configuration et les dépendances :****
-   - Une fois que vous avez ajouté vos options de configuration, vous pouvez exécuter la commande `./waf --help` pour voir la liste complète des options et pour vérifier que vos options ont été prises en compte. Une fois la configuration terminée, utilisez la commande `./waf` pour compiler NS-3.
-   - Pour vérifier la version de NS-3 installée dans votre environnement Ubuntu via WSL, vous pouvez exécuter la commande suivante :
-
-   ```
-   ./waf --version
-   ```
-
-Assurez-vous d'exécuter cette commande depuis le répertoire NS-3 où vous avez configuré et compilé le logiciel. Cette commande affichera la version de NS-3 que vous avez installée.
-
-Si vous souhaitez vérifier la version de NS-3 depuis n'importe quel répertoire, vous pouvez ajouter le chemin complet vers l'exécutable `waf` dans la commande. Par exemple :
-
-   ```
-   /chemin/vers/ns3-installation/ns-allinone-3.xx/ns-3.xx/waf --version
-   ```
-
-Remplacez "/chemin/vers/ns3-installation" par le chemin réel vers le dossier d'installation de NS-3 sur votre système.
+***3. Vérifier les Options de Configuration et les dépendances :***
+   
 Il n'existe pas de commande unique pour vérifier la version de toutes les dépendances de NS-3 en une seule fois. Cependant, vous pouvez vérifier la version des dépendances individuellement en utilisant des commandes spécifiques à chaque bibliothèque ou outil. Voici quelques exemples de commandes que vous pouvez utiliser pour vérifier la version de certaines dépendances courantes :
     - Vérification de la Version de Python
       ```
@@ -357,3 +332,51 @@ Il n'existe pas de commande unique pour vérifier la version de toutes les dépe
 Pour un bon aperçu de [la programmation des sockets TCP/IP](https://shop.elsevier.com/books/tcp-ip-sockets-in-c/donahoo/978-0-12-374540-8)
 La source des exemples du livre [ici](http://cs.baylor.edu/~donahoo/practical/CSockets/)
 Un livre sur [les sockets multicast](https://shop.elsevier.com/books/multicast-sockets/makofske/978-1-55860-846-7)
+
+*Profil de build*
+Dans le contexte du développement logiciel et de la construction de projets, un "profil de build" fait référence à un ensemble spécifique de configurations et d'options de compilation utilisées pour générer une version spécifique d'un logiciel. Chaque profil de build peut être conçu pour répondre à des besoins particuliers, tels que la génération d'une version de production, d'une version de débogage, d'une version optimisée, etc.
+
+Les profils de build permettent aux développeurs de personnaliser la manière dont le logiciel est construit en fonction des objectifs du projet et des conditions d'utilisation. Voici quelques exemples courants de profils de build :
+
+1. **Release :** Le profil de build de version finale destiné à la distribution. Il est généralement optimisé pour la performance et ne contient pas d'informations de débogage. C'est la version que les utilisateurs finaux installeront.
+
+2. **Debug :** Le profil de build utilisé pour le débogage. Il peut inclure des informations de débogage, des assertions et des vérifications supplémentaires pour faciliter la recherche et la correction d'erreurs.
+
+3. **Optimized :** Un profil de build optimisé pour les performances, généralement utilisé pour les tests de performance. Les optimisations de compilation sont activées pour améliorer les performances du logiciel.
+
+4. **Test :** Un profil de build pour exécuter des tests unitaires ou de validation. Il peut inclure des informations de débogage supplémentaires pour faciliter l'identification des erreurs lors des tests.
+
+5. **Profile :** Un profil de build utilisé pour la profilage de performance, visant à identifier les parties du code qui consomment le plus de ressources.
+
+6. **Minimal :** Un profil de build minimal qui ne compile que le strict minimum nécessaire. Cela peut être utile pour créer des versions légères du logiciel.
+
+Chaque profil de build peut être configuré avec différentes options de compilation, de liaisons de bibliothèques et d'autres paramètres en fonction des besoins. En utilisant des profils de build, les développeurs peuvent facilement générer différentes versions du logiciel pour différentes fins sans avoir à réajuster les options à chaque fois.
+ - Si vous avez du code qui ne doit s'exécuter que dans des profils de build spécifiques, utilisez la macro Code Wrapper indiquée :
+```
+NS_BUILD_DEBUG(std::cout << "Part of an output line..." << std::flush; timer.Start());
+DoLongInvolvedComputation();
+NS_BUILD_DEBUG(timer.Stop(); std::cout << "Done: " << timer << std::endl;)
+```
+ - La combinaison d'un répertoire de sortie différent avec l'option `--out`  avec des profils de build vous permet de basculer entre les différentes options de compilation de manière claire :
+```
+./ns3 configure --build-profile=debug --out=build/debug
+./ns3 build
+...
+./ns3 configure --build-profile=optimized --out=build/optimized
+./ns3 build
+...
+```
+ - Lorsque vous changez de profil de build comme celui-ci, vous devez faire attention à donner les mêmes paramètres de configuration à chaque fois. Il peut être pratique de définir certaines variables d'environnement pour vous aider à éviter les erreurs :
+```
+$ export NS3CONFIG="--enable-examples --enable-tests"
+$ export NS3DEBUG="--build-profile=debug --out=build/debug"
+$ export NS3OPT=="--build-profile=optimized --out=build/optimized"
+
+$ ./ns3 configure $NS3CONFIG $NS3DEBUG
+$ ./ns3 build
+...
+$ ./ns3 configure $NS3CONFIG $NS3OPT
+$ ./ns3 build
+```
+ - 
+
