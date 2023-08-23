@@ -22,10 +22,10 @@ Chacun de ces simulateurs utilise une approche différente pour modéliser les r
 
 *NS-3 (Network Simulator 3)*
 
-NS-3 est principalement développé pour les systèmes basés sur Unix/Linux, ce qui signifie qu'il peut être plus facile d'installer et d'utiliser NS-3 sur un environnement Unix/Linux tel qu'Ubuntu. Cependant, il existe des moyens d'exécuter NS-3 sur Windows sans avoir besoin d'une machine virtuelle Ubuntu. Voici quelques options que vous pouvez envisager :
+NS-3 est principalement développé pour les systèmes basés sur Unix/Linux, ce qui signifie qu'il peut être plus facile d'installer et d'utiliser NS-3 sur un environnement Unix/Linux tel qu'Ubuntu. Cependant, il existe des moyens d'exécuter NS-3 sur [Windows](https://www.nsnam.org/docs/installation/html/windows.html) sans avoir besoin d'une machine virtuelle Ubuntu. Voici quelques options que vous pouvez envisager :
 
-**1. Utilisation de WSL (Windows Subsystem for Linux) :**
-   - Windows 10 prend en charge WSL, qui vous permet d'exécuter un environnement Linux directement sur Windows.
+**1. Utilisation de [WSL](https://learn.microsoft.com/en-us/windows/wsl/) (Windows Subsystem for Linux) :**
+   - Windows 10 prend en charge [WSL](https://learn.microsoft.com/en-us/windows/wsl/), qui vous permet d'exécuter un environnement Linux directement sur Windows.
    - Vous pouvez installer une distribution Linux telle qu'Ubuntu via WSL et ensuite suivre les étapes d'installation de NS-3 comme si vous étiez sur un système Linux.
 
 **2. Utilisation d'une Machine Virtuelle Linux :**
@@ -33,7 +33,7 @@ NS-3 est principalement développé pour les systèmes basés sur Unix/Linux, ce
    - Dans la VM Ubuntu, vous pouvez installer et exécuter NS-3 comme vous le feriez sur un système Ubuntu natif.
 
 **3. Utilisation d'Environnements de Développement Intégrés (IDE) :**
-   - Certains IDE, comme Visual Studio Code, offrent des extensions qui permettent de développer et d'exécuter des projets NS-3 directement sur Windows.
+   - Certains IDE, comme [Visual Studio Code](https://code.visualstudio.com/docs/remote/wsl), offrent des extensions qui permettent de développer et d'exécuter des projets NS-3 directement sur Windows.
    - Ces extensions peuvent fournir un environnement de développement NS-3 plus convivial pour les utilisateurs Windows.
 
 **4. Utilisation de Docker :**
@@ -78,7 +78,7 @@ L'utilisation de WSL (Windows Subsystem for Linux) pour exécuter NS-3 sur Windo
 Maintenant que vous avez installé une distribution Linux via WSL, vous pouvez accéder à un environnement Linux complet à partir de Windows. Vous pouvez utiliser cette distribution Linux pour exécuter NS-3 et d'autres applications Linux directement sur votre système Windows. Pour en savoir plus sur [Les commandes de base en console linux](https://doc.ubuntu-fr.org/tutoriel/console_commandes_de_base#les_commandes_de_base_en_console_linux) N'hésitez pas à continuer avec les étapes d'installation et de configuration de NS-3 dans cet environnement.
 
 **B. Installer les Outils et Dépendances :**
-Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsystem for Linux), vous devrez vous assurer d'avoir les outils et dépendances nécessaires pour la compilation et l'exécution de NS-3. Voici comment vous pouvez installer ces outils et dépendances :
+Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsystem for Linux), vous devrez vous assurer d'avoir les outils et dépendances nécessaires pour la compilation et l'exécution de NS-3. Les scripts dans ns-3 sont réalisés en C++ ou Python. La plupart de l' API ns-3 est disponible en Python, mais les modèles sont écrits en C++ dans les deux cas. Voici comment vous pouvez installer ces outils et dépendances :
 
 ***1. Ouvrir le Terminal :***
    - Ouvrez votre environnement Ubuntu installé via WSL en lançant la distribution Linux à partir du menu Démarrer.
@@ -88,6 +88,7 @@ Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsyste
      ```
      sudo apt install g++ build-essential
      ```
+Si vous êtes nouveau en C++, [Une connaissance pratique du C++ et des concepts orientés objet](https://cplusplus.com/doc/tutorial/)
 
 ***3. Installer Python :***
    - NS-3 utilise Python pour diverses tâches. Assurez-vous d'avoir Python installé en exécutant la commande :
@@ -101,7 +102,7 @@ Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsyste
      sudo apt install libgtk2.0-dev libboost-all-dev
      ```
 ***5. Installer CMake :***
-   - CMake est un outil de génération de systèmes de construction qui facilite la création, la configuration et la compilation de projets logiciels. Il est largement utilisé pour simplifier le processus de compilation et de création de projets complexes. NS-3 utilise CMake pour générer les fichiers de configuration nécessaires à la compilation de son code source. Utilisez la commande suivante pour installer CMake :
+   - CMake est un outil de génération de systèmes de construction qui facilite la création, la configuration et la compilation de projets logiciels. Il est largement utilisé pour simplifier le processus de compilation et de création de projets complexes. Pour les détails de CMake, les documents CMake sont disponibles [ici](https://cmake.org/cmake/help/latest/index.html) ou le [code](https://gitlab.kitware.com/cmake/cmake). NS-3 utilise CMake pour générer les fichiers de configuration nécessaires à la compilation de son code source. Utilisez la commande suivante pour installer CMake :
    ```
    sudo apt install cmake
    ```
@@ -142,12 +143,11 @@ Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsyste
      ```
      sudo apt install libsqlite3-dev libfftw3-dev libzmq3-dev
      ```
-
 Assurez-vous de consulter la documentation spécifique de NS-3 pour la version que vous utilisez et pour les fonctionnalités que vous prévoyez d'exploiter. La documentation de NS-3 vous fournira des informations détaillées sur les dépendances requises pour les différents modules et fonctionnalités.
 
 En installant ces outils et dépendances, vous vous assurez que votre environnement Ubuntu via WSL est prêt à compiler et exécuter NS-3. Après avoir installé les dépendances, vous pouvez passer à l'étape suivante, c'est-à-dire télécharger et extraire NS-3, puis configurer et compiler le logiciel conformément à la documentation.
 
-**B. Installation de NS-3 :**
+**C. Installation de NS-3 :**
    L'installation de NS-3 dans un environnement Windows via WSL (Windows Subsystem for Linux) implique essentiellement d'effectuer les mêmes étapes que vous feriez sur une machine Linux. Voici comment procéder :
 
 ***1. Ouvrir WSL :***
@@ -319,35 +319,40 @@ Si vous souhaitez vérifier la version de NS-3 depuis n'importe quel répertoire
 
 Remplacez "/chemin/vers/ns3-installation" par le chemin réel vers le dossier d'installation de NS-3 sur votre système.
 Il n'existe pas de commande unique pour vérifier la version de toutes les dépendances de NS-3 en une seule fois. Cependant, vous pouvez vérifier la version des dépendances individuellement en utilisant des commandes spécifiques à chaque bibliothèque ou outil. Voici quelques exemples de commandes que vous pouvez utiliser pour vérifier la version de certaines dépendances courantes :
-
-      ```Vérification de la Version de Python
+    - Vérification de la Version de Python
+      ```
       python3 --version
       ```
-      
-      ```Vérification de la Version de G++ (Compilateur C++)
+    - Vérification de la Version de G++ (Compilateur C++)  
+      ```
       g++ --version
       ```
-      ```Vérification de la Version du Système de construction (cmake)
+      - Vérification de la Version du Système de construction (cmake)
+      ```
       cmake --version
       ```
-      
-      
-      ```Vérification de la Version de Boost
+      - Vérification de la Version de Boost
+      ```
       dpkg -l | grep libboost
       ```
-      
-      ```Vérification de la Version de libxml2
+      - Vérification de la Version de libxml2
+      ```
       dpkg -l | grep libxml2
       ```
-      
-      ```Vérification de la Version de libpcap
+      - Vérification de la Version de libpcap
+      ```
       dpkg -l | grep libpcap
       ```
-      
-      ```Vérification de la Version de libnl
+      - Vérification de la Version de libnl
+      ```
       dpkg -l | grep libnl
       ```
-      ```Vérification de la Version de libsqlite3
+      - Vérification de la Version de libsqlite3
+      ```
       dpkg -l | grep libsqlite3
       ```
 
+*Programmation des sockets*
+Pour un bon aperçu de [la programmation des sockets TCP/IP](https://shop.elsevier.com/books/tcp-ip-sockets-in-c/donahoo/978-0-12-374540-8)
+La source des exemples du livre [ici](http://cs.baylor.edu/~donahoo/practical/CSockets/)
+Un livre sur [les sockets multicast](https://shop.elsevier.com/books/multicast-sockets/makofske/978-1-55860-846-7)
