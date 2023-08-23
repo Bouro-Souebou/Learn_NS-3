@@ -1,3 +1,27 @@
+*Exemples de simulateurs de réseau de capteurs sans fil pour différentes approches de simulation :*
+
+**1. Simulation à Événements Discrets :**
+   - **NS-3 (Network Simulator 3)** : NS-3 est un exemple de simulateur à événements discrets très utilisé. Il permet de modéliser les réseaux de capteurs sans fil en simulant des événements discrets tels que les envois de paquets, les réceptions, les collisions, etc. Il prend en compte le comportement des nœuds capteurs, les protocoles de communication et les interactions entre les entités du réseau. En résumé, l'expression "réseau à événements discrets" décrit la façon dont le simulateur de réseau gère le temps et les interactions dans le système modélisé, en se concentrant sur des moments spécifiques où des événements significatifs se produisent plutôt que sur un flux de temps continu.
+
+**2. Modélisation Continue :**
+   - **OMNeT++** : OMNeT++ est un simulateur de réseau basé sur une modélisation à composants où le temps est considéré comme un continuum. Il permet de modéliser des réseaux de capteurs avec des composants continus et discrets, ce qui est utile pour simuler des phénomènes qui varient de manière continue.
+
+**3. Simulateurs basés sur des Équations Différentielles :**
+   - **Matlab/Simulink** : Matlab et Simulink sont largement utilisés pour modéliser et simuler des systèmes basés sur des équations différentielles. Ils peuvent être utilisés pour modéliser des capteurs, des réseaux de capteurs et des comportements complexes basés sur des équations de taux de changement.
+
+**4. Simulation basée sur des Règles :**
+   - **SwarmSim** : SwarmSim est un simulateur basé sur des règles conçu pour modéliser des comportements d'essaim et de réseau de capteurs. Il permet de définir des règles individuelles pour chaque nœud capteur et d'observer comment ces règles influencent le comportement global du réseau.
+
+**5. Modélisation basée sur des Automates :**
+   - **Cellular Automata Sensor Network Simulator (CA-SNS)** : CA-SNS est un simulateur qui utilise des automates cellulaires pour modéliser le comportement des nœuds capteurs et des interactions dans un réseau de capteurs. Les automates cellulaires permettent de représenter les états des nœuds et les transitions entre eux.
+
+**6. Modélisation basée sur des Réseaux de Petri :**
+   - **Petri-NS (Petri Net Simulator)** : Petri-NS est un exemple de simulateur basé sur des réseaux de Petri pour modéliser des réseaux de capteurs. Il permet de définir les places, les transitions et les règles de transition pour modéliser le comportement des nœuds et des communications dans le réseau.
+
+Chacun de ces simulateurs utilise une approche différente pour modéliser les réseaux de capteurs sans fil en fonction de la méthode de simulation choisie. Le choix du simulateur dépend des spécificités de votre projet, de vos besoins de simulation et du niveau de détail que vous recherchez.
+
+*NS-3 (Network Simulator 3)*
+
 NS-3 est principalement développé pour les systèmes basés sur Unix/Linux, ce qui signifie qu'il peut être plus facile d'installer et d'utiliser NS-3 sur un environnement Unix/Linux tel qu'Ubuntu. Cependant, il existe des moyens d'exécuter NS-3 sur Windows sans avoir besoin d'une machine virtuelle Ubuntu. Voici quelques options que vous pouvez envisager :
 
 **1. Utilisation de WSL (Windows Subsystem for Linux) :**
@@ -144,8 +168,22 @@ En installant ces outils et dépendances, vous vous assurez que votre environnem
      ```
      tar -xvf ns-allinone-3.39.tar.bz2 -C ns3-installation
      ```
+   -Les commandes ci-dessous utilisent un wrapper Python autour de CMake, appelé ns3, qui simplifie la syntaxe de la ligne de commande, ressemblant à la syntaxe Waf . Il existe plusieurs options pour contrôler la build, mais activer les exemples de programmes et les tests, pour un profil de build par défaut (avec les assertions activées et la prise en charge de la journalisation ns-3 ) est ce qui est généralement fait au début :
 
-
+     ```
+     ./ns3 configure --enable-examples --enable-tests
+     ```
+  - Ensuite, utilisez le ns3programme pour créer les bibliothèques et les exécutables du module ns-3 :
+     ```
+     ./ns3 configure --enable-examples --enable-tests
+     ```
+     - Une fois terminé, vous pouvez exécuter les tests unitaires pour vérifier votre build :
+   
+      ```
+      ./test.py
+      ```
+      Cette commande devrait exécuter plusieurs centaines de tests unitaires. S'ils réussissent, vous avez réussi une construction initiale de ns-3 .
+    
 **D. configurer et construire NS-3**
 
 Dans le contexte de NS-3 (Network Simulator 3), le processus de build consiste à configurer et compiler le code source de NS-3 afin de générer les exécutables nécessaires pour exécuter des simulations de réseaux. La configuration et la compilation sont gérées à l'aide d'outils comme CMake, qui permettent de définir des options, de gérer les dépendances et de générer les fichiers de construction nécessaires.
