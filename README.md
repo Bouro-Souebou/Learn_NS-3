@@ -265,9 +265,6 @@ ou
 
 ****3. Visualiser les Résultats :****
    - Après avoir exécuté un exemple de simulation, vous pouvez consulter les fichiers de sortie ou de journalisation générés pour voir les résultats de la simulation.
-
-****4. Explorer d'autres Exemples :****
-   - NS-3 propose de nombreux autres exemples de simulation dans divers domaines. Explorez le répertoire des exemples pour en savoir plus sur les fonctionnalités de NS-3.
  
 **G. Accès aux Fichiers :**
    - Vous pouvez accéder aux fichiers de votre système Windows depuis WSL en naviguant vers le répertoire `/mnt` (par exemple, `/mnt/c/` pour le lecteur C).
