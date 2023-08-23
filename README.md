@@ -78,6 +78,7 @@ L'utilisation de WSL (Windows Subsystem for Linux) pour exécuter NS-3 sur Windo
 Maintenant que vous avez installé une distribution Linux via WSL, vous pouvez accéder à un environnement Linux complet à partir de Windows. Vous pouvez utiliser cette distribution Linux pour exécuter NS-3 et d'autres applications Linux directement sur votre système Windows. Pour en savoir plus sur [Les commandes de base en console linux](https://doc.ubuntu-fr.org/tutoriel/console_commandes_de_base#les_commandes_de_base_en_console_linux) N'hésitez pas à continuer avec les étapes d'installation et de configuration de NS-3 dans cet environnement.
 
 **B. Installer les Outils et Dépendances :**
+
 Avant d'installer NS-3 dans votre environnement Ubuntu via WSL (Windows Subsystem for Linux), vous devrez vous assurer d'avoir les outils et dépendances nécessaires pour la compilation et l'exécution de NS-3. Les scripts dans ns-3 sont réalisés en C++ ou Python. La plupart de l' API ns-3 est disponible en Python, mais les modèles sont écrits en C++ dans les deux cas. Voici comment vous pouvez installer ces outils et dépendances :
 
 ***1. Ouvrir le Terminal :***
