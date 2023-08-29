@@ -1,6 +1,7 @@
 *Conceptual Overview*
 
 **Noeud**
+
 Dans ns-3, l'abstraction de base du dispositif informatique est appelée le nœud. La `class Node` fournit des méthodes pour gérer les représentations de dispositifs informatiques dans les simulations.
      
 **Application**
@@ -12,7 +13,7 @@ Dans ns-3, l'abstraction de base pour un programme utilisateur qui génère une 
      
  **Channel(Cannal)**
  
-     Dans le monde simulé de ns-3 , on connecte un Node à un objet représentant un canal de communication. Ici, l'abstraction de base du sous-réseau de communication est appelée le canal et est représentée en C++ par la `classe Channel`.
+ Dans le monde simulé de ns-3 , on connecte un Node à un objet représentant un canal de communication. Ici, l'abstraction de base du sous-réseau de communication est appelée le canal et est représentée en C++ par la `classe Channel`.
          
 **Périphérique Internet(Net Device)**
 
